@@ -1,7 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
-const Home = () => {
+const Menu = ({ cat }) => {
+  const [posts, setPosts] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await axios.get(`/posts/?cat=${cat}`);
+  //       setPosts(res.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [cat]);
   const posts = [
     {
       id: 1,
@@ -28,28 +41,18 @@ const Home = () => {
       img: "https://images.pexels.com/photos/6157049/pexels-photo-6157049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     },
   ];
-
   return (
-    <div className="home">
-      <div className="posts">
-        {posts.map((post) => (
-          <div className="post" key={post.id}>
-            <div className="img">
-              {/* <img src={`../upload/${post.img}`} alt="" /> */}
-              <img src={post.img} alt="" />
-            </div>
-            <div className="content">
-              <Link className="link" to={`/post/${post.id}`}>
-                <h1>{post.title}</h1>
-              </Link>
-              {/* <p>{getText(post.desc)}</p> */}
-              <button>Read More</button>
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className="menu">
+      <h1>Other posts you may like</h1>
+      {posts.map((post) => (
+        <div className="post" key={post.id}>
+          <img src={`../upload/${post?.img}`} alt="" />
+          <h2>{post.title}</h2>
+          <button>Read More</button>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default Home;
+export default Menu;
